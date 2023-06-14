@@ -1,21 +1,25 @@
-require_relative 'board.rb'
-
 class Piece
-    attr_reader :color, :pos
+  attr_reader :pos, :color, :board
 
-    def initialize(pos, board, color)
-        @pos = pos
-        @board = board
-        @color = color        
-    end
+  def initialize(pos, color, board)
+    @pos = pos
+    @color = color
+    @board = board
+  end
 
-    def valid_pos
-        res = []
-        @board.board.each.with_index do |rows, i|
-            rows.each.with_index do |ele, j|
-                res << [i, j] if ele.nil?
-            end
-        end
-        res
-    end
+  def symbol
+    'P'
+  end
+
+  def to_s
+    symbol
+  end
+
+  def inspect
+    self.class
+  end
+
+  def empty?
+    false
+  end
 end

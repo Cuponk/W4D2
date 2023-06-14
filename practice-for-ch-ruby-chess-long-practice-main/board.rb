@@ -1,53 +1,76 @@
-require_relative "piece.rb"
+# generally use require for system files
+require_relative './piece.rb'
+require_relative './null_piece.rb'
+require_relative './bishop.rb'
+require_relative './pawn.rb'
+require_relative './rook.rb'
+require_relative './knight.rb'
+require_relative './king.rb'
+require_relative './queen.rb'
+
+
 class Board
-    attr_reader :board
+  attr_reader :grid, :null_piece
 
-    def initialize
-        @board = Array.new(8){Array.new(8)}
-        white_rows = [0,1]
-        black_rows = [6,7]
-        @board.each.with_index do |row, i|
-            if white_rows.include?(i)
-                row.each.with_index do |pos, j|
-                    @board[i][j] = Piece.new([i,j], @board, 'white')
-                end
-            elsif black_rows.include?(i)
-                row.each.with_index do |pos, j|
-                    @board[i][j]  = Piece.new([i,j], @board, 'balck')
-                end
-            end
-        end
-    end
-    def render
-        @board.each do |row|
-            puts
-            row.each do |ele|
-                if !ele.nil?
-                    print ele.color
-                else
-                    print "_"
-                end
-            end
-        end
-    end
-    def move_piece(star_pos, end_pos)
-        if @board[star_pos[0]][ star_pos[1]].nil? || !valid_position?(star_pos)
-            raise 'inconrrect star position'
-        end
-        
-        if !@board[end_pos[0]][ end_pos[1]].nil? || !valid_position?(end_pos)
-            raise 'inconrrect end position'
-        end
-        @board[star_pos[0]][ star_pos[1]], @board[end_pos[0]][ end_pos[1]] = @board[end_pos[0]][ end_pos[1]] , @board[star_pos[0]][ star_pos[1]]
-        
-    end
-    def valid_position?(pos)
-            x, y = pos
-            x_right = x >= 0 && x <= 7
-            y_right = y >= 0 && y <= 7
-            x_right && y_right
-    end
+  def initialize
+    @null_piece = NullPiece.instance
+    @grid = Array.new(8) { Array.new(8, null_piece) }
+    populate
+  end
 
+  def move_piece(start_pos, end_pos)
+    piece = self[start_pos]
+    self[end_pos] = piece
+    self[start_pos] = null_piece
+  end
+
+  def valid_pos?(pos)
+    pos.all? { |ele| ele >= 0 && ele <= 7 }
+  end
+
+  def [](pos)
+    r, c = pos
+    grid[r][c]
+  end
+
+  def []=(pos, val)
+    r, c = pos
+    grid[r][c] = val
+  end
+
+  def populate
+      grid[1] = grid[1].map.with_index { |_, j| Pawn.new([1,j], :white, self) }
+    
+      grid[6] = grid[6].map.with_index { |_, j| Pawn.new([6,j], :black, self) }
+      grid[0][0] = Rook.new([0,0], :white, self)
+      grid[0][7] = Rook.new([0,7], :white, self)
+      grid[7][0] = Rook.new([7,0], :black, self)
+      grid[7][7] = Rook.new([7,7], :black, self)
+      grid[0][2] = Bishop.new([0,2], :white, self)
+      grid[0][5] = Bishop.new([0,5], :white, self)
+      grid[7][2] = Bishop.new([7,3], :black, self)
+      grid[7][5] = Bishop.new([7,5], :black, self)
+      grid[0][1] = Knight.new([0,2], :white, self)
+      grid[0][6] = Knight.new([0,6], :white, self)
+      grid[7][1] = Knight.new([7,2], :black, self)
+      grid[7][6] = Knight.new([7,6], :black, self)
+      grid[0][3] = King.new([0,3], :white, self)
+      grid[7][3] = King.new([7,3], :black, self)
+      grid[0][4] = Queen.new([0,4], :white, self)
+      grid[7][4] = Queen.new([7,4], :black, self)
+  end
+
+  def to_s
+    grid.inject('') do |acc, row|
+      acc + "#{row.join(' ')}\n"
+    end
+  end
 end
-# b = Board.new
-# p b.board[0][0].moves
+
+b = Board.new
+puts b
+
+
+# p calls inspect and outputs to console with a new line
+# puts calls to_s and outputs to console with a new line
+# print calls to _s and outputs to console
