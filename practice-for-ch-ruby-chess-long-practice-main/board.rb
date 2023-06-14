@@ -9,11 +9,11 @@ class Board
         @board.each.with_index do |row, i|
             if white_rows.include?(i)
                 row.each.with_index do |pos, j|
-                   @board[i][j] = Piece.new([i,j], @board, 'white')
+                    @board[i][j] = Piece.new([i,j], @board, 'white')
                 end
             elsif black_rows.include?(i)
                 row.each.with_index do |pos, j|
-                   @board[i][j]  = Piece.new([i,j], @board, 'balck')
+                    @board[i][j]  = Piece.new([i,j], @board, 'balck')
                 end
             end
         end

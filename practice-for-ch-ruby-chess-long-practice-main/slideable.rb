@@ -7,12 +7,10 @@ module Slideable
         res = []
         while i <= 7
             move_dirs.map do |dir|
-                # res << [dir[0] * i, dir[1] * i]
                 res << dir.dup.map! { |j| j * i } 
             end
             i += 1
         end
         res.select { |pos| valid_pos.include?(pos) }
-    
     end
 end

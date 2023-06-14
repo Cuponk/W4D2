@@ -9,6 +9,6 @@ class Bishop < Piece
     end
 end
 
-board = Board.new
-test = Bishop.new([0,0], board, 'white')
-p test.moves
+# board = Board.new
+# test = Bishop.new([0,0], board, 'white')
+# p test.moves

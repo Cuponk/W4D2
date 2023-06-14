@@ -5,10 +5,10 @@ class Rook < Piece
     attr_reader :symbol
     symbol = :rook
     def move_dirs
-        [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        HORIZONTAL_DIRS
     end
 end
 
-board = Board.new
-test = Rook.new([0,0], board, 'white')
-p test.moves
+# board = Board.new
+# test = Rook.new([0,0], board, 'white')
+# p test.moves
