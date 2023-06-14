@@ -11,8 +11,9 @@ class Display
 
     end
     def render
-        @board.grid.inject('') do |acc, row|
-            acc + "#{row.join(' ')}\n"
+       @board.grid.each do |row|
+        puts
+            row.each {|ele| print "#{ ele} "}
         end
     end
     def play_game
@@ -26,4 +27,5 @@ class Display
 end
 
 b = Display.new(Board.new)
-b.play_game
+b.render
+#"#{row.join(' ')}\n"
