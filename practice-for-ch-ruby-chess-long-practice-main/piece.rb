@@ -1,4 +1,4 @@
-
+require_relative 'board.rb'
 
 class Piece
     attr_reader :color, :pos
@@ -11,7 +11,7 @@ class Piece
 
     def valid_pos
         res = []
-        @board.each.with_index do |rows, i|
+        @board.board.each.with_index do |rows, i|
             rows.each.with_index do |ele, j|
                 res << [i, j] if ele.nil?
             end

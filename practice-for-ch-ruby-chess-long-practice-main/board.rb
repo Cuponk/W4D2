@@ -49,5 +49,5 @@ class Board
     end
 
 end
-b = Board.new
-p b.board[0][0].moves
+# b = Board.new
+# p b.board[0][0].moves

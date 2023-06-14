@@ -7,7 +7,7 @@ class Queen < Piece
     attr_reader :symbol
     symbol = :queen
     def move_dirs
-        [[1, 1], [-1, -1], [-1, 1], [1, -1], [1, 0], [0, 1], [-1, 0], [0, -1]]
+        HORIZONTAL_DIRS + DIAGONAL_DIRS
     end
 end
 # board = Board.new
