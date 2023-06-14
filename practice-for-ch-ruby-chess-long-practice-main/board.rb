@@ -54,10 +54,10 @@ class Board
       grid[0][6] = Knight.new([0,6], :white, self)
       grid[7][1] = Knight.new([7,2], :black, self)
       grid[7][6] = Knight.new([7,6], :black, self)
-      grid[0][3] = King.new([0,3], :white, self)
-      grid[7][3] = King.new([7,3], :black, self)
-      grid[0][4] = Queen.new([0,4], :white, self)
-      grid[7][4] = Queen.new([7,4], :black, self)
+      grid[0][4] = King.new([0,3], :white, self)
+      grid[7][4] = King.new([7,3], :black, self)
+      grid[0][3] = Queen.new([0,4], :white, self)
+      grid[7][3] = Queen.new([7,4], :black, self)
   end
 
   def to_s
@@ -67,8 +67,8 @@ class Board
   end
 end
 
-b = Board.new
-puts b
+# b = Board.new
+# puts b
 
 
 # p calls inspect and outputs to console with a new line

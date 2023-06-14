@@ -9,6 +9,6 @@ class King < Piece
   end
 
   def symbol
-    '♗'
+    '♔'
   end
 end
