@@ -1,5 +1,6 @@
 require_relative "piece.rb"
 class Board
+    attr_reader :board
 
     def initialize
         @board = Array.new(8){Array.new(8)}
@@ -49,5 +50,4 @@ class Board
 
 end
 b = Board.new
-b.move_piece([0, 0], [4,5])
-p b.render
+p b.board[0][0].moves
