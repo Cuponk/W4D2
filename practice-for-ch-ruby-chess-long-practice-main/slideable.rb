@@ -11,6 +11,10 @@ module Slideable
             end
             i += 1
         end
+        res.each do |dir_pos|
+            #adding the originial position to the direction position
+            dir_pos.each.with_index {|x,i| dir_pos[i] += @pos[i]}
+        end
         res.select { |pos| valid_pos.include?(pos) }
     end
 end
