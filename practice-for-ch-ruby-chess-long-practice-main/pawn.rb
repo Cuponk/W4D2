@@ -4,7 +4,7 @@ class Pawn < Piece
     attr_reader :symbol
     
     def symbol
-        '♙'
+        '♙'.colorize(@color)
     end
 
     def move_dirs
